@@ -111,6 +111,7 @@ public class MySqlGamePersistence implements PGNPersistence {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void createOutcomeIndex() {
 		try {
 			final String sqlString = "SELECT * FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_CATALOG = 'def' AND TABLE_SCHEMA = DATABASE() AND TABLE_NAME = \"game\" AND INDEX_NAME = \"OutcomeIndex\"";
@@ -128,6 +129,7 @@ public class MySqlGamePersistence implements PGNPersistence {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void createMovesIndex() {
 		try {
 			final String sqlString = "SELECT * FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_CATALOG = 'def' AND TABLE_SCHEMA = DATABASE() AND TABLE_NAME = \"game\" AND INDEX_NAME = \"MoveIndex\"";

@@ -1,7 +1,5 @@
 package chess.gui;
 
-import static chess.pgn.PGNUtilities.persistPGNFile;
-import static chess.pgn.PGNUtilities.writeGameToPGNFile;
 import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
 import static javax.swing.SwingUtilities.invokeLater;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
@@ -508,7 +506,7 @@ public final class Table extends Observable {
 
 	private static void loadPGNFile(final File pgnFile) {
 		try {
-			persistPGNFile(pgnFile);
+			chess.pgn.PGNUtilities.persistPGNFile(pgnFile);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -516,7 +514,7 @@ public final class Table extends Observable {
 
 	private static void savePGNFile(final File pgnFile) {
 		try {
-			writeGameToPGNFile(pgnFile, Table.get().getMoveLog());
+			chess.pgn.PGNUtilities.writeGameToPGNFile(pgnFile, Table.get().getMoveLog());
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
