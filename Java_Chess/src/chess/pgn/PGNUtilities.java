@@ -60,18 +60,18 @@ public class PGNUtilities {
                             tagsBuilder.addTag(matcher.group(1), matcher.group(2));
                         }
                     }
-                    else if (isEndOfGame(line)) {
+                    else if (/*isEndOfGame(line)*/true) {
                         final String[] ending = line.split(" ");
                         final String outcome = ending[ending.length - 1];
                         gameTextBuilder.append(line.replace(outcome, "")).append(" ");
                         final String gameText = gameTextBuilder.toString().trim();
-                        if(!gameText.isEmpty() && gameText.length() > 80) {
+                        if(!gameText.isEmpty() && gameText.length() > 0) {
                             final Game game = GameFactory.createGame(tagsBuilder.build(), gameText, outcome);
                             System.out.println("(" +(++count)+") Finished parsing " +game+ " count = " + (++count));
-                            if(game.isValid()) {
-                                MySqlGamePersistence.get().persistGame(game);
-                                validCount++;
-                            }
+//                            if(game.isValid()) {
+//                                MySqlGamePersistence.get().persistGame(game);
+//                                validCount++;
+//                            }
                         }
                         gameTextBuilder = new StringBuilder();
                         tagsBuilder = new PGNGameTags.TagsBuilder();
@@ -118,9 +118,9 @@ public class PGNUtilities {
     }
 
     private static List<String> createMovesFromPGN(final String pgnText) {
-        if(!pgnText.startsWith("1.")) {
-            return Collections.emptyList();
-        }
+//        if(!pgnText.startsWith("1.")) {
+//            return Collections.emptyList();
+//        }
         final List<String> sanitizedMoves = new LinkedList<>(Arrays.asList(
                 removeParenthesis(pgnText).replaceAll(Pattern.quote("$") + "[0-9]+", "").replaceAll("[0-9]+\\s*\\.\\.\\.", "")
                         .split("\\s*[0-9]+" + Pattern.quote("."))));
